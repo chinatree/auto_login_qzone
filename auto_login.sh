@@ -112,7 +112,7 @@ fi
 
 if [ "$1" == "-c" ]; then
     if [ -f "$2" ]; then
-        rela_path=$(echo $2 | grep ^./|^/)
+        rela_path=$(echo $2 | egrep '^./|^/')
         if [ -z "${rela_path}" ]; then
             source ${SCRIPT_PATH}/$2
         else
