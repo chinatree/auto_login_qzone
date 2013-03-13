@@ -1,0 +1,11 @@
+auto_login.sh
+Auto login qq from qzone interface.
+
+common.sh
+Global common function.
+
+config.ini
+Config file.
+
+encode_password.js
+With the node run this script to generate encrypted password.
