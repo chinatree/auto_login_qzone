@@ -1,3 +1,6 @@
+环境要求：
+    nodejs支持、curl
+
 功能：
     该脚本实现通过QQ空间自动登录并保存 cookie 里的 skey 以便在腾迅其他产品上实现各种 POST 或 GET。
 
