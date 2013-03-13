@@ -10,3 +10,12 @@
 注：
 建议采用 ./auto_login.sh -c config.ini，此方法不会在 history 中留下痕迹
 若在非私人机器上使用，为安全起见用完记得清除 config.ini 文件或者将内容里 QQ密码 清除掉。
+
+例：
+$ ./auto_login.sh -c config.ini
+Starting login 10000 at 2013-03-14 03:26:57
+Login 10000 is [ SUCCESS ]
+you can use /home/test/github/auto_login_qq.git/cookie/10000.cookie.txt to do other things.
+Finish at 2013-03-14 03:27:28
+
+看到提示 Login ... SUCCESS 表示登录成功，生成的 cookie 文件绝对路径也在在回显中显示。
