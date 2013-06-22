@@ -1,7 +1,7 @@
 #!/bin/bash
-# author   : chinatree <chinatree2012@gmail.com>
-# date     : 2013-01-09
-# version  : 1.0.2
+# Author   : chinatree <chinatree2012@gmail.com>
+# Date     : 2013-06-22
+# Version  : 1.2
 
 # [global]
 SCRIPT_PATH=$(cd "$(dirname "$0")"; pwd)
@@ -74,7 +74,7 @@ function chk_is_problem () {
         local normal_ver=$(cat "${qq_vc_file}" | awk -F "\'" '{print $4}' | grep ^!)
         if [ -z "${normal_ver}" ]; then
             echo "`get_color "Verification code is perhaps image verification code, login interrupt ..." RED`"
-			exit 1
+            exit 1
         fi
         return 0
     fi
@@ -92,12 +92,12 @@ function chk_is_problem () {
         else
             cat "${qq_result_file}"
             echo "`get_color "So sorry, login failed, you can check and try again ..." RED`"
-			exit 1
+            exit 1
         fi
         return 0
     fi
 
-    if [ "${action}" == "encode" ]; then    
+    if [ "${action}" == "encode" ]; then
         if [ -z "${Q_ENCODE_P}" ]; then
             echo "`get_color "The password encode failed, login interrupt ..." RED`"
             exit 1

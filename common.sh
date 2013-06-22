@@ -41,10 +41,12 @@ function get_color()
 
 function get_exit_code()
 {
-    if [ "$?" -ne 0 ];then
+    if [ "${1:-1}" -ne 0 ];then
         echo "[`get_color " FAILED " RED`]"
-        if [ "$2" -ne "1" ]; then
+        if [ "${2:-1}" -ne 0 ]; then
             exit "$1"
+        else
+            return
         fi
     else
         echo "[`get_color " OK " GREEN`]"
