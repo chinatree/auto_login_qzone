@@ -19,7 +19,7 @@
     git clone git@github.com:chinatree/auto_login_qzone.git
     cd ${path}/auto_login_qzone/
     bash toolchains/init.sh
-    不需要需验证码：，：
+    不需要需验证码：
     全自动登录 QQ 空间： $ ./auto_login.sh -c=etc/config.ini -act=auto
     
     需要手工输验证码：    
