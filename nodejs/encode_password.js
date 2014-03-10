@@ -1,4 +1,4 @@
-var hexcase = 1;
+﻿var hexcase = 1;
 var b64pad = "";
 var chrsz = 8;
 var mode = 32;
@@ -174,24 +174,7 @@ function uin2hex(str) {
 if(process.argv.length != 5) {
     console.log("usage: node " + process.argv[1] + " <qq> <password> <verifycode>");
 } else {
-//    var uin = new Buffer(process.argv[2], 'base64').toString().substr(0,32);
-//    var uin = process.argv[2].replace(/x/g, "\\x");
     var uin = hexchar2bin(process.argv[2]);
-//    var uin = "\x00\x00\x00\x00\x51\x84\xe7\x28"
-//    console.log("uin = \"" + uin + "\"");
-//    uin2 = "\x00\x00\x00\x00\x51\x84\xe7\x28"
-//    console.log(typeof(uin2));
-//    uin = uin.replace(/\\/g, "\\");
-//    if (uin == "\x00\x00\x00\x00\x51\x84\xe7\x28") {
-//        console.log("Equal");
-//    } else {
-//        console.log(uin.length);
-//        console.log(typeof(uin));
-//    }
-//    str="x00x00x00x00x51x84xe7x28".replace(/x/g, "\\x");
-//   str2=process.argv[2].replace(/x/g, "\\x");
-//    console.log("Orgin:"+md5("x00x00x00x00x51x84xe7x28".replace(/x/g, "\\x")));
-//    console.log("Receive:"+md5(process.argv[2].replace(/\\x/g, "\\x")));
     var password = process.argv[3];
     var verifycode = process.argv[4].toUpperCase();
 
@@ -200,4 +183,3 @@ if(process.argv.length != 5) {
     var D = md5(E + verifycode);
     console.log(D); 
 }
-

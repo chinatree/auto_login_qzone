@@ -1,24 +1,78 @@
+更新时间：
+    2014-03-10
+
+计划：
+    下一版本整合现有的 3g 登录自动给好友发消息(目前该功能用于告警)
+    
 环境要求：
-    nodejs支持、curl
+    必须：nodejs、curl
+    可选：php(qzone_talk.sh时用到)
 
 功能：
-    该脚本实现通过QQ空间自动登录并保存 cookie 里的 skey 以便在腾迅其他产品上实现各种 POST 或 GET。
+    该项目脚本实现通过QQ空间自动登录并保存 cookie 。
+    结合 cookie 里的 skey 可以很方便在腾迅其他产品上实现各种 POST 或 GET 的操作。
+    注：
+    腾迅的大多数产品仅需要 SKEY + GTK 就 KO，且腾迅业务线太长，目前很难整改，除非架构重构。
+    所以目前该功能至少还能用好久好久 zzZZZ ...
 
 使用：
-    cd ${path}/auto_login_qq/
-    ./auto_login.sh QQ号/邮箱/手机 QQ密码
+    git clone git@github.com:chinatree/auto_login_qzone.git
+    cd ${path}/auto_login_qzone/
+    bash toolchains/init.sh
+    不需要需验证码：，：
+    全自动登录 QQ 空间： $ ./auto_login.sh -c=etc/config.ini -act=auto
+    
+    需要手工输验证码：    
+    取验证码： $ ./auto_login.sh -c=etc/config.ini -act=get_captcha_pic
+    登录：     $ ./auto_login.sh -c=etc/config.ini -act=login_qzone -code=6666
+    
+    --------    登录成功后一个 SKEY 走天下    --------
+    取开放平台应用的 Token：
+    ./app/open_token.sh -c=config.ini -act=get_token -appid=10000
+    查看说说：
+    ./app/qzone_talk.sh -c=etc/account.ini -act=list
+    发表说说：
+    ./app/qzone_talk.sh -c=etc/account.ini -act=post
+
+目录：
+    .  根目录，
+    ├── app    具体操作功能脚本目录
+    │   ├── open_token.sh    取开平 Token 脚本
+    │   ├── qzone_talk.php   解析说说返回的 json
+    │   └── qzone_talk.sh    空间说说读、写、删脚本
+    ├── auto_login.sh        主登录脚本，核心
+    ├── common               通用函数目录
+    │   └── functions.sh     通用函数脚本
+    ├── etc
+    │   ├── accout.ini       帐号配置模板文件
+    │   ├── config.ini       通用性变量及函数
+    │   └── qzone_talk.ini   说说配置模板文件
+    ├── logs                 日志目录
+    │   └── 10000            每个帐号单独存放
+    │       └── qzone_talk   说说执行输出目录
+    │   ├── execute.log      执行日志记录
+    ├── nodejs
+    │   ├── encode_g_tk.js   由 SKEY 生成 GTK
+    │   ├── encode_password.js  加密明文密码
+    │   └── saltUin.js       取得帐号的 uin，仅支持 QQ/QQ Mail    
+    └── toolchains           工具箱目录
+        └── init.sh          初始化脚本权限及目录权限
+
+脚本通用参数说明：
+    -u=<QQ>                  登录帐号，可支持 QQ/QQ Mail/Phone
+    -p=<PASSWORD>            登录密码
     或
-    ./auto_login.sh -c config.ini
+    -c=<file>                指定配置文件
+    建议采用 -c=<etc/account.ini> 指定配置文件，此方法不会在 history 中留下痕迹
+    若在非私人机器上使用，为安全起见用完记得清除 account.ini 文件或者将内容里 QQ密码 清除掉。
+    -h, --help               显示脚本的使用帮助
+    -T                       开启 BASH 跟踪过程
 
-注：
-建议采用 ./auto_login.sh -c config.ini，此方法不会在 history 中留下痕迹
-若在非私人机器上使用，为安全起见用完记得清除 config.ini 文件或者将内容里 QQ密码 清除掉。
-
-例：
+例子：
 $ ./auto_login.sh -c config.ini
-Starting login 10000 at 2013-03-14 03:26:57
-Login 10000 is [ SUCCESS ]
-you can use /home/test/github/auto_login_qq.git/cookie/10000.cookie.txt to do other things.
-Finish at 2013-03-14 03:27:28
+Starting login 10000 at 2014-03-10 18:26:57
+Auto login 10000 is [ OK ]
+you can use /home/chinatree.lu/github/auto_login_qzone/logs/logs/750271149/cookie.jar to do other things.
+Finish at 2014-03-10 18:27:28
 
-看到提示 Login ... SUCCESS 表示登录成功，生成的 cookie 文件绝对路径也在在回显中显示。
+看到提示 Login ... is [ OK ] 表示登录成功，生成的 cookie.jar 文件绝对路径也在在回显中显示。

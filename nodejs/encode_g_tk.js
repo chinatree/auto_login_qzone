@@ -1,4 +1,4 @@
-function getGTK(str){
+﻿function getGTK(str){
    var hash = 5381;
    for(var i = 0, len = str.length; i < len; ++i)
    {
@@ -8,7 +8,7 @@ function getGTK(str){
 }
 
 if(process.argv.length != 3) {
-    console.log("usage: node " + process.argv[1] + " <qq> <password> <verifycode>");
+    console.log("usage: node " + process.argv[1] + " <qq>");
 } else {
     var gtk = getGTK(process.argv[2]);
     console.log(gtk); 
